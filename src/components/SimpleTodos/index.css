@@ -1,0 +1,25 @@
+/* Write your CSS here */
+.bg {
+  background-color: #ffc2a0;
+  font-family: 'Roboto';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.container {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style-type: none;
+  width: 100%;
+}
+.heading {
+  text-align: center;
+  color: #ff8542;
+  font-size: 32px;
+}

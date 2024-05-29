@@ -1,0 +1,22 @@
+/* Write your CSS here */
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.title {
+  color: #000000;
+  font-size: 24px;
+}
+.delete-btn {
+  border: 2px #ff0b37 solid;
+  border-radius: 8px;
+  height: 24px;
+  width: 80px;
+  font-size: 18px;
+  background-color: transparent;
+  color: #ff0b37;
+  outline: none;
+  cursor: pointer;
+}
