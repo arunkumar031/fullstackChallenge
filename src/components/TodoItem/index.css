@@ -9,6 +9,9 @@
   color: #000000;
   font-size: 24px;
 }
+.strike {
+  text-decoration: line-through;
+}
 .delete-btn {
   border: 2px #ff0b37 solid;
   border-radius: 8px;
@@ -19,4 +22,24 @@
   color: #ff0b37;
   outline: none;
   cursor: pointer;
+  margin-left: 30px;
+}
+.edit-btn {
+  border-radius: 8px;
+  border: 0;
+  height: 24px;
+  width: 80px;
+  font-size: 18px;
+  background-color: skyblue;
+  outline: none;
+  cursor: pointer;
+  margin-left: 30px;
+  color: #ffffff;
+}
+.edit-input {
+  outline: none;
+  cursor: pointer;
+  height: 28px;
+  width: 60%;
+  font-size: 20px;
 }

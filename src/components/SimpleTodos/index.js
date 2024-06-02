@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {v4 as uuidv4} from 'uuid'
 import TodoItem from '../TodoItem'
 
 import './index.css'
@@ -38,9 +39,15 @@ const initialTodosList = [
   },
 ]
 
+const newTodosList = initialTodosList.map(each => ({
+  ...each,
+  isSaved: true,
+  isChecked: false,
+}))
+
 // Write your code here
 class SimpleTodos extends Component {
-  state = {todosList: initialTodosList}
+  state = {todosList: newTodosList, input: '', edit: ''}
 
   deleteTodo = id => {
     const {todosList} = this.state
@@ -50,19 +57,93 @@ class SimpleTodos extends Component {
     })
   }
 
-  render() {
+  checked = id => {
     const {todosList} = this.state
+    const filterdList = todosList.map(each =>
+      each.id === id ? {...each, isChecked: !each.isChecked} : each,
+    )
+    this.setState({
+      todosList: filterdList,
+    })
+  }
+
+  editSaveTodo = id => {
+    const {todosList, edit} = this.state
+    const todo = todosList.filter(each => each.id === id)[0]
+    if (todo.isSaved) {
+      const filterdList = todosList.map(each =>
+        each.id === id ? {...each, isSaved: !each.isSaved} : each,
+      )
+      this.setState({
+        todosList: filterdList,
+        edit: todosList.filter(each => each.id === id)[0].title,
+      })
+    } else {
+      const filterdList = todosList.map(each =>
+        each.id === id ? {...each, isSaved: !each.isSaved, title: edit} : each,
+      )
+      this.setState({
+        todosList: filterdList,
+        edit: todosList.filter(each => each.id === id)[0].title,
+      })
+    }
+    /* const filterdList = todosList.map(each =>
+      each.id === id ? {...each, isSaved: !each.isSaved} : each,
+    )
+    this.setState({
+      todosList: filterdList,
+      edit: todosList.filter(each => each.id === id)[0].title,
+    }) */
+  }
+
+  onChangeTitle = edit => {
+    this.setState({
+      edit,
+    })
+  }
+
+  onChangeInput = event => {
+    this.setState({input: event.target.value})
+    console.log(event.target)
+  }
+
+  addTodo = () => {
+    const {input} = this.state
+    const newTodo = {id: uuidv4(), title: input, isSaved: true}
+    this.setState(prevState => ({
+      todosList: [...prevState.todosList, newTodo],
+      input: '',
+    }))
+  }
+
+  render() {
+    const {todosList, input, edit} = this.state
 
     return (
       <div className="bg">
         <div className="container">
           <h1 className="heading">Simple Todos</h1>
+          <div>
+            <input
+              type="text"
+              value={input}
+              className="add-input"
+              onChange={this.onChangeInput}
+            />
+            <button type="button" className="add-btn" onClick={this.addTodo}>
+              Add
+            </button>
+          </div>
           <ul className="list-container">
             {todosList.map(each => (
               <TodoItem
                 key={each.id}
                 details={each}
-                toDelete={this.deleteTodo}
+                deleteTodo={this.deleteTodo}
+                editSaveTodo={this.editSaveTodo}
+                onChangeTitle={this.onChangeTitle}
+                edit={edit}
+                checked={this.checked}
               />
             ))}
           </ul>
