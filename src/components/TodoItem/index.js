@@ -2,14 +2,8 @@
 import './index.css'
 
 const TodoItem = props => {
-  const {
-    details,
-    deleteTodo,
-    editSaveTodo,
-    onChangeTitle,
-    edit,
-    checked,
-  } = props
+  const {details, deleteTodo, editSaveTodo, onChangeTitle, edit, checked} =
+    props
   const {id, title, isSaved, isChecked} = details
 
   const editSaveBtnText = isSaved ? 'Edit' : 'Save'
